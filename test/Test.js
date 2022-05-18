@@ -28,7 +28,7 @@ describe("GLDToken Test", function(){
         expect(await gldToken.symbol()).to.equal(symbolTest);
     })
     it("Return owner's account", async function(){
-        expect(owner.address).to.equal(gldToken.address);
+        expect(await gldToken.owner()).to.equal(owner.address);
     })
     it("Return Total Supply", async function(){
         const ownerBalances = await gldToken.balanceOf(owner.address);
