@@ -28,10 +28,14 @@ describe("GLDToken Test", function(){
         expect(await gldToken.symbol()).to.equal(symbolTest);
     })
     it("Return owner's account", async function(){
-        expect("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4").to.equal(owner.address);
+        expect(owner.address).to.equal(gldToken.address);
     })
     it("Return Total Supply", async function(){
         const ownerBalances = await gldToken.balanceOf(owner.address);
         expect(await gldToken.totalSupply()).to.equal(ownerBalances);
+    })
+    it("Claim Token, should return balances of claimed address", async function(){
+        await gldToken.transfer(addr1.address, 50);
+        expect(await gldToken.balanceOf(addr1.address)).to.equal(50);
     })
 })
