@@ -8,13 +8,12 @@ describe("GLDToken Test", function(){
     let addr1;
     let addr2;
     let addrs;
-    let GLDToken;
-    // let totalSupply = 
+    let GLDToken; 
 
     beforeEach(async function(){
         GLDToken = await hre.ethers.getContractFactory("GLDToken");
         [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
-        gldToken = await GLDToken.deploy("10000000000000000000000");
+        gldToken = await GLDToken.deploy("10000");
         
     })
     it("Return Token's name", async function(){
