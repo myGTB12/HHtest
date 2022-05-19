@@ -1,10 +1,10 @@
-pragma solidity 0.4.16;
+pragma solidity 0.8.14;
 
 import "./ERC20.sol";
 import "./ERC20_Token.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
-contract Vesting is ERC20{
+contract Vesting is ERC20, Ownable{
     using SafeMath for uint256;
     ERC20Interface public token;
     uint256 public firstRelease;
@@ -17,6 +17,7 @@ contract Vesting is ERC20{
     buyerInfo[100] public whiteList;
 
     struct BuyerInfo{
+        uint256 currentTimeClaimed;
         uint256 amount;
         uint256 tokenClaimed;
     }
@@ -27,24 +28,24 @@ contract Vesting is ERC20{
         uint256 _startTime;
         uint256 _clif;
         uint256 _totalPeriod;
-        uint256 _ timePerPeriods;
+        uint256 _timePerPeriods;
     }
     modifier onlyAdmin(){
         require(msg.sender = ADMIN);
     }
-    function fundVesting() is Ownable{
-        // Transfer(msg.sender, whiteList, BuyerInfo.amount)
-         for(uint i = 0; i < whiteList.length; i++){
-            Transfer(msg.sender, whiteList[i], BuyerInfo.amount);
-        }
+    function fundVesting() Ownable{
+        approve(ADMIN, 100000000);
+        allowance(_token, ADMIN);
+        
     }
+     
     function whiteList(){
         for(uint i = 0; i < whiteList.length; i++){
             whiteList.push(buyerInfo);
         }
     }
     function claimToken(){
-        require(buyerInfo[msg.sender].currnetTimeClaim < block.timestamp, "NOT TIME TO CLIAM TOKEN");
+        require(buyerInfo[msg.sender].);
         transferFrom(ADMIN, msg.sender, buyerInfo[msg.sender].valueOutput);
     } 
 }
